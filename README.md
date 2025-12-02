@@ -118,6 +118,64 @@ git push -u origin main
 17. git restore filename // to undo changes made to file before staging.
 
 
+DOCKER COMPOSE 
+services:
+  wordpress:  # WordPress service
+    image: wordpress:latest
+    ports:
+      - "8081:80"  # Map port 80 of the container to port 8080 of the host
+    environment:
+      WORDPRESS_DB_HOST: db:3306  # Database host
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db  # Ensures the db service starts first
+
+  db:  # MySQL service
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+How to Run It
+To run a multi-container setup like the one above:
+1.	Save the file as docker-compose.yml.
+               Or
+docker-compose.yaml
+2.	To Start the compose
+docker-compose up –d
+3.	To stop the containers 
+       docker-compose down
+4.	To scale the container
+docker-compose up --scale <service name>=2 -d
+1.Define and run multiple interdependent services
+Task:
+I.	Create a new folder compose-lab
+Inside it, create a file docker-compose.yml with the following content:
+version: "3.9"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_db
+II. Run the setup:
+docker compose up -d
+III. Open your browser and visit: http://localhost:8080.
+IV. Expected Output:
+Nginx welcome page is displayed.
+db container runs in the background.
+
+
 PART 1 — Install & Open Jenkins
 1.	Open your browser.
 2.	Type: http://localhost:8080
