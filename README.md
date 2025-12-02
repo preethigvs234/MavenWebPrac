@@ -36,7 +36,8 @@ Step 11:Run the application
      Right-click on App.java -> Run As -> Java Application
 Output: "Hello World" displayed in the console.
 
-Maven Web Java Project
+
+Maven WEB JAVA Project
 Step 1: Open Eclipse
    └── 1.1 Launch Eclipse IDE.
    └── 1.2 Select or create a workspace.
