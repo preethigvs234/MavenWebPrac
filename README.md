@@ -469,3 +469,130 @@ Paste in browser → Your website appears 🎉
 sudo docker ps -> gives container id 
 sudo docker stop <container id>
 
+**Docker CLI**
+--> docker pull redis
+--> docker run --name my-redis -d redis
+What It Does:
+• Creates and starts a container named my-redis from the redis image.
+• The -d flag runs the container in the background.
+--> docker ps //lists running containers
+--> docker exec -it my-redis redis-cli //opens redis
+Example Redis Commands:
+127.0.0.1:6379> SET name "Alice"
+OK
+127.0.0.1:6379> GET name
+"Alice"
+127.0.0.1:6379>exit // to come out
+--> docker stop my-redis
+Step 6: Restart the Redis Container
+Command:
+--> docker start my-redis
+Remove the Redis Container
+Command:
+--> docker rm my-redis  // Note before removing stop the container
+--> docker rmi redis
+What It Does:
+• Deletes the Redis image from your local system.
+
+**Working with Docker file**
+A Dockerfile is a text file with instructions to create a custom Docker image.
+Step 1: Set Up Your Folder
+1. Windows:
+o Create a folder like C:\DockerProjects\Redis.
+o Open Git Bash and navigate to the folder:
+cd /c/DockerProjects/Redis
+2. Mac/Linux:
+o Create a folder:
+mkdir ~/DockerProjects/Redis
+cd ~/DockerProjects/Redis
+Step 2: Write the Dockerfile
+1. Inside the folder, create a file named Dockerfile (no extension).
+2. Add the following content:
+FROM redis:latest
+CMD ["redis-server"]
+Docker Commands (Step-by-step):
+1. docker build -t redisnew  .
+What it does:
+• This creates (builds) a Docker image using the recipe (Dockerfile) in the current
+folder (.).
+• -t redisnew: Gives the image a name/tag ("redisnew"), so you can find it easily.
+2. docker run --name myredisnew -d redisnew
+What it does:
+• Starts a new container (mini computer) from the redisnew image.
+• --name myredisnew: Names the container "myredisnew" so it’s easy to identify.
+• -d: Runs the container in the background.
+3. docker ps
+What it does:
+• Shows a list of containers that are running right now.
+4. docker stop myredisnew
+What it does:
+• Stops the container named "myredisnew" (like turning off a computer).
+5. docker login
+What it does:
+• Logs you into your Docker Hub account, so you can upload images.
+6. docker ps -a
+What it does:
+• Shows a list of all containers, including stopped ones.
+7. docker commit 0e993d2009a1 name/redis1 
+// Note 0e993d2009a1 is container id of myredisnew
+What it does:
+• Takes a snapshot (saves changes) of the container with ID 0e993d2009a1 and creates a
+new image called name/redis1.
+8. docker images
+What it does:
+• Lists all images saved on your system. // will show image of name/redis1
+9. docker push name/redis1
+What it does:
+• Uploads the image name/redis1 to Docker Hub, so others can download
+it.
+10. docker rm 0e993d2009a1  // container id of myredisnew
+What it does:
+• Deletes the container with ID 0e993d2009a1 of myredisnew.
+11. docker rmi name/redis1
+What it does:
+• Deletes the image name/redis1 from your system.
+12. docker ps -a
+What it does:
+Shows all containers again to confirm changes.
+13. docker logout
+What it does:
+• Logs you out of Docker Hub.
+14. docker pull name/redis1
+What it does:
+• Downloads the image name/redis1 from Docker Hub.
+15. docker run --name myredis -d name/redis1
+What it does:
+• Starts a new container using the image name/redis1.
+16. docker exec -it myredis redis-cli
+What it does:
+• Opens the Redis command-line interface (like a terminal) inside the running container
+myredis.
+17. SET name "Abcdef"
+What it does:
+• Saves a key-value pair in Redis (key = name, value = Abcdef).
+18. GET name
+What it does:
+• Retrieves the value of the key name from Redis (it will return "Abcdef").
+19. exit
+What it does:
+• Exits the Redis CLI.
+20. docker ps -a
+What it does:
+• Shows all containers again to check their status.
+21. docker stop myredis
+What it does:
+• Stops the container myredis.
+22. docker rm 50a6e4a9c326
+What it does:
+• Deletes the container with ID 50a6e4a9c326.
+23. docker images
+What it does:
+• Lists all images again to confirm which ones remain.
+24. docker rmi name/redis1
+What it does:
+• Deletes the image name/redis1 again.
+Step 3: Remove Login Credentials (Optional)
+If you no longer need to be logged in, you can log out:
+docker logout
+What It Does:
+• Logs you out from Docker Hub and removes your stored credentials.
